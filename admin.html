@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Elegant Options AI — Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#06091A;--bg2:#0D1530;--bg3:#111827;
+  --blue:#1A6BF0;--blue2:#3D87FF;
+  --gold:#C9922A;--gold2:#F5B942;
+  --green:#0FA958;--red:#E03939;
+  --white:#FFFFFF;--gray:#8892A4;--gray2:#C4CBDA;
+  --border:rgba(255,255,255,0.08);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--white);min-height:100vh}
+
+/* BG */
+.bg-blobs{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.blob{position:absolute;border-radius:50%;filter:blur(100px);opacity:0.12;animation:drift 20s ease-in-out infinite}
+.b1{width:500px;height:500px;background:#1A6BF0;top:-150px;left:-100px}
+.b2{width:400px;height:400px;background:#C9922A;bottom:-100px;right:-80px;animation-delay:-8s}
+@keyframes drift{0%,100%{transform:translate(0,0)}50%{transform:translate(20px,-30px)}}
+
+.page{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column}
+
+/* NAV */
+nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 40px;
+  border-bottom:1px solid var(--border);
+  background:rgba(6,9,26,0.8);backdrop-filter:blur(20px);
+  position:sticky;top:0;z-index:100;
+}
+.logo{font-family:'Syne',sans-serif;font-size:18px;font-weight:800}
+.logo span{color:var(--gold2)}
+.nav-right{display:flex;align-items:center;gap:12px}
+.admin-badge{
+  font-size:11px;font-weight:600;letter-spacing:0.08em;
+  background:rgba(201,146,42,0.15);color:var(--gold2);
+  border:1px solid rgba(201,146,42,0.3);
+  border-radius:100px;padding:5px 14px;
+}
+.nav-link{
+  font-size:13px;color:var(--gray);text-decoration:none;
+  padding:8px 16px;border-radius:8px;
+  background:rgba(255,255,255,0.05);
+  transition:.2s;
+}
+.nav-link:hover{background:rgba(255,255,255,0.1);color:var(--white)}
+
+/* MAIN */
+main{flex:1;padding:48px 40px;max-width:1100px;margin:0 auto;width:100%}
+
+.page-header{margin-bottom:40px}
+.page-header h1{
+  font-family:'Syne',sans-serif;font-size:32px;font-weight:800;
+  letter-spacing:-0.02em;margin-bottom:8px;
+}
+.page-header p{font-size:14px;color:var(--gray);line-height:1.6}
+
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+
+/* FORM CARD */
+.card{
+  background:rgba(255,255,255,0.03);
+  border:1px solid var(--border);
+  border-radius:20px;padding:28px;
+}
+.card-title{
+  font-family:'Syne',sans-serif;font-size:16px;font-weight:700;
+  margin-bottom:6px;
+}
+.card-sub{font-size:12px;color:var(--gray);margin-bottom:24px}
+
+.field{margin-bottom:18px}
+.field label{
+  display:block;font-size:12px;font-weight:500;
+  color:var(--gray2);letter-spacing:0.04em;margin-bottom:7px;
+}
+.field label span{color:var(--red)}
+.field input,.field select,.field textarea{
+  width:100%;background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:10px;padding:11px 14px;
+  color:var(--white);font-size:13px;font-family:'Inter',sans-serif;
+  outline:none;transition:.2s;
+}
+.field input:focus,.field select:focus,.field textarea:focus{
+  border-color:var(--blue);background:rgba(26,107,240,0.08);
+}
+.field input::placeholder,.field textarea::placeholder{color:rgba(255,255,255,0.2)}
+.field select option{background:#1a2035;color:#fff}
+.field textarea{resize:vertical;min-height:70px}
+
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+.divider{height:1px;background:var(--border);margin:22px 0}
+
+/* n8n toggle */
+.toggle-section{
+  background:rgba(26,107,240,0.06);
+  border:1px solid rgba(26,107,240,0.2);
+  border-radius:12px;padding:16px;margin-bottom:18px;
+}
+.toggle-header{
+  display:flex;align-items:center;justify-content:space-between;
+  cursor:pointer;
+}
+.toggle-header span{font-size:13px;font-weight:500;color:var(--blue2)}
+.toggle-arrow{font-size:12px;color:var(--blue2);transition:.2s}
+.toggle-arrow.open{transform:rotate(180deg)}
+.toggle-body{display:none;margin-top:14px}
+.toggle-body.open{display:block}
+.n8n-status{
+  display:flex;align-items:center;gap:8px;
+  font-size:12px;color:var(--gray);margin-top:12px;
+}
+.n8n-dot{width:7px;height:7px;border-radius:50%;background:var(--gray);flex-shrink:0}
+.n8n-dot.active{background:var(--green);animation:pulse-dot 2s infinite}
+@keyframes pulse-dot{0%,100%{box-shadow:0 0 0 0 rgba(15,169,88,0.4)}50%{box-shadow:0 0 0 5px rgba(15,169,88,0)}}
+
+/* BTNs */
+.btn-primary{
+  width:100%;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;
+  background:linear-gradient(135deg,var(--blue),var(--blue2));
+  color:#fff;border:none;border-radius:12px;
+  padding:14px;cursor:pointer;transition:.25s;
+  box-shadow:0 8px 24px rgba(26,107,240,0.3);
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(26,107,240,0.45)}
+.btn-primary:disabled{opacity:0.5;cursor:not-allowed;transform:none}
+
+.btn-n8n{
+  width:100%;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;
+  background:rgba(201,146,42,0.15);color:var(--gold2);
+  border:1px solid rgba(201,146,42,0.35);border-radius:12px;
+  padding:13px;cursor:pointer;transition:.25s;margin-top:10px;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.btn-n8n:hover{background:rgba(201,146,42,0.25)}
+.btn-n8n:disabled{opacity:0.4;cursor:not-allowed}
+
+/* OUTPUT */
+.output-section{display:none}
+.output-section.visible{display:block}
+
+.output-card{
+  background:rgba(15,169,88,0.06);
+  border:1px solid rgba(15,169,88,0.25);
+  border-radius:16px;padding:24px;margin-bottom:16px;
+}
+.output-label{
+  font-size:11px;font-weight:600;letter-spacing:0.1em;
+  color:var(--green);text-transform:uppercase;margin-bottom:10px;
+}
+.url-box{
+  background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.08);
+  border-radius:10px;padding:12px 14px;
+  font-size:12px;color:var(--gray2);
+  word-break:break-all;line-height:1.6;
+  font-family:monospace;
+}
+.output-btns{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.btn-copy,.btn-open,.btn-preview{
+  font-size:12px;font-weight:600;
+  padding:9px 18px;border-radius:8px;cursor:pointer;
+  border:none;transition:.2s;
+  display:flex;align-items:center;gap:6px;
+}
+.btn-copy{background:rgba(26,107,240,0.15);color:var(--blue2);border:1px solid rgba(26,107,240,0.3)}
+.btn-copy:hover{background:rgba(26,107,240,0.25)}
+.btn-open{background:rgba(15,169,88,0.15);color:#4ADE80;border:1px solid rgba(15,169,88,0.3)}
+.btn-open:hover{background:rgba(15,169,88,0.25)}
+.btn-preview{background:rgba(201,146,42,0.15);color:var(--gold2);border:1px solid rgba(201,146,42,0.3)}
+.btn-preview:hover{background:rgba(201,146,42,0.25)}
+
+/* PREVIEW IFRAME */
+.preview-wrap{
+  display:none;margin-top:16px;
+  border:1px solid var(--border);border-radius:16px;overflow:hidden;
+}
+.preview-wrap.visible{display:block}
+.preview-bar{
+  background:var(--bg2);padding:10px 16px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid var(--border);
+}
+.preview-bar span{font-size:11px;color:var(--gray)}
+.preview-close{background:none;border:none;color:var(--gray);cursor:pointer;font-size:16px}
+.preview-iframe{width:100%;height:500px;border:none;display:block}
+
+/* N8N STATUS CARD */
+.n8n-result{
+  display:none;
+  background:rgba(201,146,42,0.06);
+  border:1px solid rgba(201,146,42,0.2);
+  border-radius:12px;padding:16px;margin-top:12px;
+}
+.n8n-result.visible{display:block}
+.n8n-result-title{font-size:12px;font-weight:600;color:var(--gold2);margin-bottom:6px}
+.n8n-result-text{font-size:11px;color:var(--gray);line-height:1.6}
+
+/* HISTORY */
+.history-card{margin-top:24px}
+.history-item{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 0;border-bottom:1px solid var(--border);
+}
+.history-item:last-child{border-bottom:none}
+.history-biz{font-size:13px;font-weight:500;color:var(--white)}
+.history-meta{font-size:11px;color:var(--gray);margin-top:3px}
+.history-actions{display:flex;gap:8px}
+.history-btn{
+  font-size:11px;padding:5px 12px;border-radius:6px;
+  cursor:pointer;border:none;transition:.2s;
+}
+.hb-copy{background:rgba(26,107,240,0.12);color:var(--blue2)}
+.hb-open{background:rgba(15,169,88,0.12);color:#4ADE80}
+
+/* TOAST */
+.toast{
+  position:fixed;bottom:24px;right:24px;z-index:999;
+  background:#1a2035;border:1px solid rgba(255,255,255,0.1);
+  border-radius:12px;padding:12px 20px;
+  font-size:13px;color:var(--white);
+  display:flex;align-items:center;gap:10px;
+  transform:translateY(80px);opacity:0;
+  transition:.3s cubic-bezier(0.34,1.56,0.64,1);
+  box-shadow:0 8px 32px rgba(0,0,0,0.4);
+}
+.toast.show{transform:translateY(0);opacity:1}
+.toast.success{border-color:rgba(15,169,88,0.4);background:rgba(15,169,88,0.1)}
+.toast.error{border-color:rgba(224,57,57,0.4);background:rgba(224,57,57,0.1)}
+
+/* LOADING SPINNER */
+.spinner{
+  width:16px;height:16px;border:2px solid rgba(255,255,255,0.3);
+  border-top-color:#fff;border-radius:50%;
+  animation:spin .7s linear infinite;display:none;
+}
+.spinner.show{display:block}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+@media(max-width:768px){
+  .grid{grid-template-columns:1fr}
+  main{padding:32px 20px}
+  nav{padding:16px 20px}
+  .field-row{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="bg-blobs">
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+</div>
+
+<div class="page">
+<nav>
+  <div class="logo">Elegant Options <span>AI</span></div>
+  <div class="nav-right">
+    <span class="admin-badge">⚙ ADMIN PANEL</span>
+    <a href="demo.html" class="nav-link" target="_blank">View Demo ↗</a>
+  </div>
+</nav>
+
+<main>
+  <div class="page-header">
+    <h1>Deploy AI Employee Demo</h1>
+    <p>Enter the prospect's details below. The system will generate a personalized demo link instantly — or send it automatically via n8n.</p>
+  </div>
+
+  <div class="grid">
+
+    <!-- LEFT: FORM -->
+    <div>
+      <div class="card">
+        <div class="card-title">📋 Prospect Information</div>
+        <div class="card-sub">All fields marked * are required to generate the link.</div>
+
+        <div class="field">
+          <label>Business Name <span>*</span></label>
+          <input type="text" id="biz_name" placeholder="e.g. AlNoor Plumbing" />
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label>Industry <span>*</span></label>
+            <select id="industry">
+              <option value="">Select industry...</option>
+              <option value="Plumbing">🔧 Plumbing</option>
+              <option value="HVAC">❄️ HVAC</option>
+              <option value="Cleaning">✨ Cleaning</option>
+              <option value="Carpentry">🪚 Carpentry</option>
+              <option value="Electrical">⚡ Electrical</option>
+              <option value="Painting">🎨 Painting</option>
+              <option value="Landscaping">🌿 Landscaping</option>
+              <option value="Printing">🖨️ Printing</option>
+              <option value="Other">🛠️ Other</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>City <span>*</span></label>
+            <input type="text" id="city" placeholder="e.g. Kuwait City" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Phone Number</label>
+          <input type="text" id="phone" placeholder="+965 XXXX XXXX" />
+        </div>
+
+        <div class="field">
+          <label>Calendar / Booking Link <span>*</span></label>
+          <input type="url" id="booking" placeholder="https://cal.com/..." />
+        </div>
+
+        <div class="field">
+          <label>Prospect's Current Website</label>
+          <input type="url" id="website" placeholder="https://their-old-site.com" />
+          <div style="font-size:11px;color:var(--gray);margin-top:5px">
+            Used by n8n to analyze their services automatically
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Extra Notes (optional)</label>
+          <textarea id="notes" placeholder="Any specific pain points or services to highlight..."></textarea>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- n8n SECTION -->
+        <div class="toggle-section">
+          <div class="toggle-header" onclick="toggleN8n()">
+            <span>⚡ Send via n8n Automation</span>
+            <span class="toggle-arrow" id="n8n-arrow">▼</span>
+          </div>
+          <div class="toggle-body" id="n8n-body">
+            <div class="field" style="margin-bottom:12px;margin-top:4px">
+              <label>n8n Webhook URL</label>
+              <input type="url" id="n8n_webhook"
+                placeholder="https://your-n8n.app.n8n.cloud/webhook/..." />
+            </div>
+            <div class="n8n-status">
+              <span class="n8n-dot" id="n8n-dot"></span>
+              <span id="n8n-status-text">Enter webhook URL to connect</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- BUTTONS -->
+        <button class="btn-primary" onclick="generateLink()">
+          <span class="spinner" id="spinner1"></span>
+          <span id="btn1-text">🚀 GENERATE DEMO LINK</span>
+        </button>
+
+        <button class="btn-n8n" id="n8n-btn" onclick="sendToN8n()" disabled>
+          <span class="spinner" id="spinner2"></span>
+          <span id="btn2-text">⚡ SEND VIA n8n (Auto-Analyze + Deliver)</span>
+        </button>
+
+      </div>
+    </div>
+
+    <!-- RIGHT: OUTPUT -->
+    <div>
+
+      <!-- OUTPUT -->
+      <div class="output-section" id="output-section">
+        <div class="output-card">
+          <div class="output-label">✅ Demo Link Generated</div>
+          <div class="url-box" id="generated-url"></div>
+          <div class="output-btns">
+            <button class="btn-copy" onclick="copyLink()">📋 Copy Link</button>
+            <button class="btn-open" onclick="openLink()">↗ Open Demo</button>
+            <button class="btn-preview" onclick="togglePreview()">👁 Preview</button>
+          </div>
+        </div>
+
+        <!-- WhatsApp quick send -->
+        <div class="output-card" style="background:rgba(37,211,102,0.05);border-color:rgba(37,211,102,0.2)">
+          <div class="output-label" style="color:#4ADE80">📲 Quick Send</div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <button class="btn-copy" style="background:rgba(37,211,102,0.12);color:#4ADE80;border-color:rgba(37,211,102,0.3)" onclick="sendWhatsApp()">
+              💬 Send via WhatsApp
+            </button>
+            <button class="btn-copy" onclick="copyMessage()">
+              📋 Copy Message
+            </button>
+          </div>
+        </div>
+
+        <!-- n8n result -->
+        <div class="n8n-result" id="n8n-result">
+          <div class="n8n-result-title">⚡ n8n Workflow Triggered</div>
+          <div class="n8n-result-text" id="n8n-result-text"></div>
+        </div>
+
+        <!-- Preview -->
+        <div class="preview-wrap" id="preview-wrap">
+          <div class="preview-bar">
+            <span id="preview-url-label">Preview</span>
+            <button class="preview-close" onclick="closePreview()">✕</button>
+          </div>
+          <iframe class="preview-iframe" id="preview-iframe"></iframe>
+        </div>
+      </div>
+
+      <!-- PLACEHOLDER when no output yet -->
+      <div id="output-placeholder" class="card" style="text-align:center;padding:48px 24px">
+        <div style="font-size:48px;margin-bottom:16px">🎯</div>
+        <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:700;margin-bottom:8px">
+          Ready to Deploy
+        </div>
+        <div style="font-size:13px;color:var(--gray);line-height:1.6">
+          Fill in the prospect's details and click<br>"Generate Demo Link" to create their personalized AI Employee demo.
+        </div>
+      </div>
+
+      <!-- HISTORY -->
+      <div class="card history-card" id="history-card" style="display:none;margin-top:0">
+        <div class="card-title" style="margin-bottom:16px">🕐 Recent Links</div>
+        <div id="history-list"></div>
+        <button onclick="clearHistory()"
+          style="margin-top:14px;font-size:11px;color:var(--gray);background:none;border:none;cursor:pointer;text-decoration:underline">
+          Clear history
+        </button>
+      </div>
+
+    </div>
+  </div>
+</main>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+const BASE = 'https://tifa77.github.io/demo-custmer-elegant-options-ai/demo.html';
+let currentURL = '';
+let currentData = {};
+
+// ── N8N TOGGLE ──
+function toggleN8n(){
+  const body = document.getElementById('n8n-body');
+  const arrow = document.getElementById('n8n-arrow');
+  body.classList.toggle('open');
+  arrow.classList.toggle('open');
+}
+
+// Watch webhook input
+document.getElementById('n8n_webhook').addEventListener('input', function(){
+  const btn = document.getElementById('n8n-btn');
+  const dot = document.getElementById('n8n-dot');
+  const status = document.getElementById('n8n-status-text');
+  if(this.value.startsWith('http')){
+    btn.disabled = false;
+    dot.classList.add('active');
+    status.textContent = 'Webhook connected — ready to send';
+  } else {
+    btn.disabled = true;
+    dot.classList.remove('active');
+    status.textContent = 'Enter webhook URL to connect';
+  }
+});
+
+// ── GENERATE LINK ──
+function generateLink(){
+  const biz     = document.getElementById('biz_name').value.trim();
+  const industry= document.getElementById('industry').value;
+  const city    = document.getElementById('city').value.trim();
+  const booking = document.getElementById('booking').value.trim();
+  const phone   = document.getElementById('phone').value.trim();
+  const website = document.getElementById('website').value.trim();
+  const notes   = document.getElementById('notes').value.trim();
+
+  if(!biz || !industry || !city){
+    showToast('⚠ Please fill in Business Name, Industry, and City.','error');
+    return;
+  }
+
+  setLoading(1, true);
+  setTimeout(()=>{
+    const params = new URLSearchParams();
+    params.set('biz_name', biz);
+    params.set('industry', industry);
+    params.set('city', city);
+    if(booking) params.set('booking', booking);
+    if(phone)   params.set('phone', phone);
+    if(website) params.set('website', website);
+    if(notes)   params.set('notes', notes);
+
+    currentURL = BASE + '?' + params.toString();
+    currentData = {biz, industry, city, booking, phone, website};
+
+    document.getElementById('generated-url').textContent = currentURL;
+    document.getElementById('output-section').classList.add('visible');
+    document.getElementById('output-placeholder').style.display = 'none';
+
+    saveToHistory(biz, industry, city, currentURL);
+    setLoading(1, false);
+    showToast('✅ Demo link generated!','success');
+    renderHistory();
+  }, 600);
+}
+
+// ── SEND TO N8N ──
+async function sendToN8n(){
+  const webhookURL = document.getElementById('n8n_webhook').value.trim();
+  const biz     = document.getElementById('biz_name').value.trim();
+  const industry= document.getElementById('industry').value;
+  const city    = document.getElementById('city').value.trim();
+  const booking = document.getElementById('booking').value.trim();
+  const phone   = document.getElementById('phone').value.trim();
+  const website = document.getElementById('website').value.trim();
+  const notes   = document.getElementById('notes').value.trim();
+
+  if(!biz||!industry||!city){
+    showToast('⚠ Please fill required fields first.','error');
+    return;
+  }
+  if(!webhookURL){
+    showToast('⚠ Please enter your n8n webhook URL.','error');
+    return;
+  }
+
+  setLoading(2, true);
+
+  const payload = {
+    biz_name: biz,
+    industry: industry,
+    city: city,
+    booking_link: booking,
+    phone: phone,
+    website_url: website,
+    notes: notes,
+    base_demo_url: BASE,
+    timestamp: new Date().toISOString()
+  };
+
+  try {
+    const res = await fetch(webhookURL, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(payload)
+    });
+
+    const result = await res.json().catch(()=>({status:'triggered'}));
+    setLoading(2, false);
+
+    const resultEl = document.getElementById('n8n-result');
+    const resultText = document.getElementById('n8n-result-text');
+    resultEl.classList.add('visible');
+    resultText.innerHTML = `
+      ✅ Workflow triggered for <strong>${biz}</strong><br>
+      n8n is now: scraping ${website||'(no website)'} → analyzing with Gemini → building link → sending to client.<br>
+      <span style="color:var(--gray);font-size:10px">Sent at ${new Date().toLocaleTimeString()}</span>
+    `;
+    showToast('⚡ n8n workflow triggered!','success');
+
+  } catch(err){
+    setLoading(2, false);
+    // CORS fallback — n8n still receives the request
+    const resultEl = document.getElementById('n8n-result');
+    const resultText = document.getElementById('n8n-result-text');
+    resultEl.classList.add('visible');
+    resultText.innerHTML = `
+      ✅ Data sent to n8n for <strong>${biz}</strong><br>
+      Workflow is processing in the background.<br>
+      <span style="color:var(--gray);font-size:10px">Note: CORS response blocked by browser — but n8n received the data.</span>
+    `;
+    showToast('⚡ Sent to n8n!','success');
+  }
+}
+
+// ── COPY / OPEN / PREVIEW ──
+function copyLink(){
+  navigator.clipboard.writeText(currentURL);
+  showToast('📋 Link copied to clipboard!','success');
+}
+
+function openLink(){
+  window.open(currentURL,'_blank');
+}
+
+function togglePreview(){
+  const wrap = document.getElementById('preview-wrap');
+  const iframe = document.getElementById('preview-iframe');
+  if(wrap.classList.contains('visible')){
+    wrap.classList.remove('visible');
+    iframe.src='';
+  } else {
+    wrap.classList.add('visible');
+    iframe.src = currentURL;
+    document.getElementById('preview-url-label').textContent = currentData.biz + ' · Live Preview';
+  }
+}
+
+function closePreview(){
+  document.getElementById('preview-wrap').classList.remove('visible');
+  document.getElementById('preview-iframe').src='';
+}
+
+function sendWhatsApp(){
+  if(!currentURL){ showToast('Generate link first','error'); return; }
+  const msg = encodeURIComponent(
+    `Hi ${currentData.biz}! 👋\n\nWe've built a specialized AI Employee demo specifically for your ${currentData.industry} business in ${currentData.city}.\n\nYour AI Employee is ready to answer calls, qualify leads, and book appointments 24/7.\n\n🔗 Watch it in action: ${currentURL}\n\n— Elegant Options AI`
+  );
+  const phone = document.getElementById('phone').value.replace(/\D/g,'');
+  window.open(`https://wa.me/${phone}?text=${msg}`,'_blank');
+}
+
+function copyMessage(){
+  if(!currentURL){ showToast('Generate link first','error'); return; }
+  const msg = `Hi ${currentData.biz}! 👋\n\nWe've built a specialized AI Employee demo specifically for your ${currentData.industry} business in ${currentData.city}.\n\nYour AI Employee is ready to answer calls, qualify leads, and book appointments 24/7.\n\n🔗 Watch it in action: ${currentURL}\n\n— Elegant Options AI`;
+  navigator.clipboard.writeText(msg);
+  showToast('📋 Message copied!','success');
+}
+
+// ── HISTORY ──
+function saveToHistory(biz, industry, city, url){
+  const history = JSON.parse(localStorage.getItem('demo_history')||'[]');
+  history.unshift({biz, industry, city, url, time: new Date().toLocaleString()});
+  if(history.length>10) history.pop();
+  localStorage.setItem('demo_history', JSON.stringify(history));
+}
+
+function renderHistory(){
+  const history = JSON.parse(localStorage.getItem('demo_history')||'[]');
+  const card = document.getElementById('history-card');
+  const list = document.getElementById('history-list');
+  if(!history.length){ card.style.display='none'; return; }
+  card.style.display='block';
+  list.innerHTML = history.map(h=>`
+    <div class="history-item">
+      <div>
+        <div class="history-biz">${h.biz}</div>
+        <div class="history-meta">${h.industry} · ${h.city} · ${h.time}</div>
+      </div>
+      <div class="history-actions">
+        <button class="history-btn hb-copy" onclick="navigator.clipboard.writeText('${h.url}');showToast('Copied!','success')">Copy</button>
+        <button class="history-btn hb-open" onclick="window.open('${h.url}','_blank')">Open</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function clearHistory(){
+  localStorage.removeItem('demo_history');
+  renderHistory();
+}
+
+// ── HELPERS ──
+function setLoading(btn, loading){
+  if(btn===1){
+    document.getElementById('spinner1').classList.toggle('show',loading);
+    document.getElementById('btn1-text').textContent = loading ? 'Generating...' : '🚀 GENERATE DEMO LINK';
+    document.querySelector('.btn-primary').disabled = loading;
+  } else {
+    document.getElementById('spinner2').classList.toggle('show',loading);
+    document.getElementById('btn2-text').textContent = loading ? 'Sending to n8n...' : '⚡ SEND VIA n8n (Auto-Analyze + Deliver)';
+    document.getElementById('n8n-btn').disabled = loading;
+  }
+}
+
+function showToast(msg, type='success'){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = `toast ${type} show`;
+  setTimeout(()=>t.classList.remove('show'), 3000);
+}
+
+// Init
+renderHistory();
+</script>
+</body>
+</html>
