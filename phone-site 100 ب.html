@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title id="pg-title">AlNoor Plumbing — London</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --navy:#0D1B2A;
+  --blue:#1565C0;
+  --blue2:#1976D2;
+  --blue3:#0D47A1;
+  --sky:#E3F2FD;
+  --gold:#C9A84C;
+  --gold2:#E8C96A;
+  --cream:#FAFAF7;
+  --cream2:#F2EDE3;
+  --ink:#1A1A1A;
+  --gray:#6B7280;
+  --border:#D9D3C7;
+  --white:#fff;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden}
+
+/* TOPBAR */
+.topbar{background:var(--navy);padding:7px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px}
+.tb-left{font-size:11px;color:rgba(255,255,255,0.5)}
+.tb-phone{background:var(--blue);color:#fff;padding:5px 14px;border-radius:4px;font-size:11px;font-weight:600;text-decoration:none}
+
+/* NAV */
+nav{background:#fff;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;box-shadow:0 2px 10px rgba(0,0,0,0.08);border-bottom:3px solid var(--blue)}
+.nav-left{display:flex;align-items:center;gap:10px}
+.nav-left img{height:38px;width:38px;object-fit:contain;border-radius:6px}
+.nav-brand{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--navy)}
+.nav-brand b{color:var(--blue);font-weight:700}
+.nav-cta{background:var(--blue);color:#fff;padding:10px 18px;border-radius:6px;font-size:13px;font-weight:600;text-decoration:none}
+
+/* HERO */
+.hero{position:relative;min-height:85vh;background:var(--navy);display:flex;align-items:flex-end;overflow:hidden;background-image:url('https://assets.cdn.filesafe.space/vX7gQQOe9PXtkGes2GOJ/media/69d56b15ad0e3e32705d364d.png');background-size:cover;background-position:center}
+.hero-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:0.45}
+.hero-grad{position:absolute;inset:0;background:linear-gradient(110deg,rgba(13,27,42,0.97) 0%,rgba(13,27,42,0.65) 55%,rgba(13,27,42,0.25) 100%)}
+.hero-body{position:relative;z-index:2;padding:40px 20px 48px;max-width:600px}
+.hero-tag{display:inline-block;background:rgba(21,101,192,0.25);border:1px solid rgba(21,101,192,0.5);color:#90CAF9;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:5px 13px;border-radius:3px;margin-bottom:18px}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:700;color:#fff;line-height:1.1;letter-spacing:-.02em;margin-bottom:14px}
+.hero h1 em{color:var(--gold2);font-style:normal}
+.hero-sub{font-size:15px;color:rgba(255,255,255,0.7);line-height:1.7;margin-bottom:26px}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+.btn-blue{background:var(--blue);color:#fff;padding:13px 22px;border-radius:6px;font-size:14px;font-weight:600;text-decoration:none;border:none;cursor:pointer;display:flex;align-items:center;gap:7px;transition:.2s}
+.btn-blue:hover{background:var(--blue2)}
+.btn-ghost{background:rgba(255,255,255,0.08);color:#fff;padding:12px 20px;border-radius:6px;font-size:13px;font-weight:500;border:1.5px solid rgba(255,255,255,0.3);text-decoration:none;display:flex;align-items:center;gap:7px;transition:.2s}
+.btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,0.15)}
+.hero-trust{display:flex;flex-wrap:wrap;gap:12px}
+.ht{font-size:12px;color:rgba(255,255,255,0.55);display:flex;align-items:center;gap:5px}
+
+/* EMERGENCY */
+.emerg{background:var(--blue3);padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.emerg-t{font-size:13px;font-weight:600;color:#fff}
+.emerg-s{font-size:11px;color:rgba(255,255,255,0.65)}
+.emerg-btn{background:var(--gold);color:var(--navy);padding:9px 18px;border-radius:4px;font-size:12px;font-weight:700;text-decoration:none;white-space:nowrap;transition:.2s}
+.emerg-btn:hover{background:var(--gold2)}
+
+/* BANNER */
+.banner{position:relative;overflow:hidden;min-height:160px;display:flex;align-items:center}
+.banner-photo{position:absolute;right:0;top:0;height:100%;width:auto;max-width:45%;object-fit:contain;object-position:right bottom}
+.banner-grad{position:absolute;inset:0;background:linear-gradient(90deg,rgba(13,27,42,0.98) 0%,rgba(13,27,42,0.92) 50%,rgba(13,27,42,0.5) 75%,rgba(13,27,42,0.0) 100%)}
+.banner-body{position:relative;z-index:2;padding:24px 20px}
+.banner-dot{display:inline-flex;align-items:center;gap:7px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:8px}
+.banner-dot span{width:7px;height:7px;border-radius:50%;background:#4CAF50;display:inline-block;animation:pdot 2s infinite}
+@keyframes pdot{0%,100%{box-shadow:0 0 0 0 rgba(76,175,80,0.5)}50%{box-shadow:0 0 0 5px rgba(76,175,80,0)}}
+.banner h2{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:#fff;line-height:1.2;margin-bottom:6px}
+.banner-sub{font-size:12px;color:rgba(255,255,255,0.6);margin-bottom:16px}
+.banner-btns{display:flex;gap:10px;flex-wrap:wrap}
+.banner-btn-w{background:#fff;color:var(--blue);padding:9px 18px;border-radius:5px;font-size:12px;font-weight:700;text-decoration:none}
+.banner-btn-b{background:var(--blue);color:#fff;padding:9px 18px;border-radius:5px;font-size:12px;font-weight:700;text-decoration:none}
+
+/* STATS */
+.stats{background:var(--navy);display:grid;grid-template-columns:repeat(5,1fr)}
+.stat{padding:16px 10px;text-align:center;border-right:1px solid rgba(255,255,255,0.07)}
+.stat:last-child{border-right:none}
+.stat-n{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--gold2);display:block}
+.stat-l{font-size:10px;color:rgba(255,255,255,0.38);margin-top:2px;font-weight:500}
+
+/* CERTS */
+.certs{background:#fff;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:16px 20px;text-align:center}
+.certs-lbl{font-size:10px;color:var(--gray);font-weight:500;letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
+.certs-row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.cert{background:var(--cream2);border:1px solid var(--border);border-radius:5px;padding:7px 12px;font-size:11px;font-weight:700;color:var(--ink)}
+
+/* SECTIONS */
+.sec{padding:44px 20px}
+.sec-cream{background:var(--cream2)}
+.sec-white{background:#fff}
+.sec-navy{background:var(--navy)}
+.eyebrow{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);display:block;margin-bottom:8px}
+.sec-navy .eyebrow{color:var(--gold2)}
+.sec h2{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:700;line-height:1.2;letter-spacing:-.02em;margin-bottom:12px;color:var(--navy)}
+.sec-navy h2{color:#fff}
+.lead{font-size:14px;line-height:1.75;color:var(--gray);margin-bottom:24px}
+.sec-navy .lead{color:rgba(255,255,255,0.5)}
+
+/* SERVICES */
+.svc-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.svc-card{background:#fff;border-radius:10px;overflow:hidden;border:1px solid var(--border);transition:.25s;box-shadow:0 2px 10px rgba(0,0,0,0.04)}
+.svc-card:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(0,0,0,0.1);border-color:var(--blue)}
+.svc-img{height:160px;overflow:hidden;position:relative;background:linear-gradient(135deg,#1565C0,#0D47A1)}
+.svc-img img{width:100%;height:100%;object-fit:cover;object-position:center;transition:.4s;display:block}
+.svc-card:hover .svc-img img{transform:scale(1.03)}
+.svc-tag-w{position:absolute;top:8px;left:8px}
+.svc-tag{background:var(--blue);color:#fff;font-size:9px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:2px 8px;border-radius:3px}
+.svc-body{padding:12px}
+.svc-title{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;color:var(--navy);margin-bottom:4px}
+.svc-desc{font-size:11px;color:var(--gray);line-height:1.5}
+.svc-lnk{display:inline-block;font-size:11px;font-weight:600;color:var(--blue);margin-top:7px}
+
+/* WHY US */
+.why-img-wrap{border-radius:10px;overflow:hidden;margin-bottom:22px;box-shadow:0 10px 36px rgba(0,0,0,0.12)}
+.why-img-wrap img{width:100%;height:240px;object-fit:cover;object-position:center top}
+.why-list{display:flex;flex-direction:column;gap:16px}
+.why-item{display:flex;gap:12px;align-items:flex-start}
+.why-num{width:32px;height:32px;border-radius:5px;background:var(--blue);color:#fff;font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.why-title{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:3px}
+.why-desc{font-size:12px;color:var(--gray);line-height:1.55}
+
+/* AI */
+.ai-cards{display:flex;flex-direction:column;gap:14px}
+.ai-card{background:rgba(255,255,255,0.05);border:1px solid rgba(201,168,76,0.3);border-radius:12px;padding:22px}
+.ai-hdr{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.ai-icon-box{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.ai-icon-blue{background:rgba(21,101,192,0.2)}
+.ai-icon-blue2{background:rgba(21,101,192,0.15)}
+.ai-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:#fff;margin-bottom:2px}
+.ai-sub{font-size:11px;color:rgba(255,255,255,0.4)}
+.ai-dot{width:7px;height:7px;border-radius:50%;background:#4CAF50;margin-left:auto;animation:pdot 2s infinite}
+.chat-preview{background:rgba(0,0,0,0.25);border-radius:8px;padding:10px;margin-bottom:14px}
+.cbub{padding:7px 11px;border-radius:7px;font-size:11px;margin-bottom:5px;max-width:85%;line-height:1.5}
+.cu{background:var(--blue);color:#fff;margin-left:auto}
+.ca{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.82)}
+.typing{display:flex;gap:3px;padding:7px 11px;background:rgba(255,255,255,0.07);border-radius:7px;width:fit-content}
+.tdot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,0.38);animation:td .9s ease infinite}
+.tdot:nth-child(2){animation-delay:.2s}.tdot:nth-child(3){animation-delay:.4s}
+@keyframes td{0%,80%,100%{transform:scale(.7);opacity:.38}40%{transform:scale(1);opacity:1}}
+.wave{background:rgba(0,0,0,0.25);border-radius:8px;padding:14px;display:flex;align-items:center;justify-content:center;gap:4px;margin-bottom:14px}
+.wb{width:4px;border-radius:4px;background:var(--gold2);animation:wv .8s ease-in-out infinite}
+.wb:nth-child(1){height:10px;animation-delay:0s}.wb:nth-child(2){height:22px;animation-delay:.1s}
+.wb:nth-child(3){height:16px;animation-delay:.2s}.wb:nth-child(4){height:28px;animation-delay:.3s}
+.wb:nth-child(5){height:20px;animation-delay:.4s}.wb:nth-child(6){height:12px;animation-delay:.5s}
+.wb:nth-child(7){height:24px;animation-delay:.25s}.wb:nth-child(8){height:14px;animation-delay:.1s}
+@keyframes wv{0%,100%{transform:scaleY(.45);opacity:.45}50%{transform:scaleY(1);opacity:1}}
+.btn-ai{width:100%;padding:12px;border-radius:7px;border:none;font-size:13px;font-weight:600;font-family:'Jost',sans-serif;cursor:pointer;transition:.2s;display:flex;align-items:center;justify-content:center;gap:6px;text-decoration:none}
+.btn-ai-b{background:var(--blue);color:#fff}
+.btn-ai-b:hover{background:var(--blue2)}
+.btn-ai-b2{background:rgba(21,101,192,0.3);color:#90CAF9;border:1px solid rgba(21,101,192,0.4)}
+.btn-ai-b2:hover{background:rgba(21,101,192,0.45)}
+.ai-note{text-align:center;margin-top:14px;font-size:11px;color:rgba(255,255,255,0.25)}
+
+/* FORM */
+.c-wrap{display:flex;flex-direction:column;gap:22px}
+.steps{display:flex;flex-direction:column;gap:14px}
+.step{display:flex;gap:12px;align-items:flex-start}
+.step-c{width:32px;height:32px;border-radius:50%;border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:700;color:var(--gold);flex-shrink:0}
+.step-t{font-size:13px;font-weight:600;color:var(--navy);margin-bottom:2px}
+.step-d{font-size:11px;color:var(--gray)}
+.guar{background:#fff;border:1px solid var(--border);border-radius:8px;padding:14px;margin-top:4px;border-left:4px solid var(--blue)}
+.guar-t{font-size:12px;font-weight:700;color:var(--navy);margin-bottom:3px}
+.guar-d{font-size:11px;color:var(--gray);line-height:1.5}
+.form-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:22px;box-shadow:0 6px 24px rgba(0,0,0,0.06)}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fg{margin-bottom:12px}
+.flbl{font-size:10px;font-weight:600;color:var(--ink);letter-spacing:.05em;text-transform:uppercase;display:block;margin-bottom:5px}
+.finp{width:100%;padding:11px 13px;background:var(--cream);border:1.5px solid var(--border);border-radius:7px;font-size:13px;font-family:'Jost',sans-serif;color:var(--ink);outline:none;transition:.2s}
+.finp:focus{border-color:var(--blue);background:#fff;box-shadow:0 0 0 3px rgba(21,101,192,0.1)}
+.finp::placeholder{color:#B0A9A0}
+select.finp{appearance:none;cursor:pointer}
+textarea.finp{resize:none;height:76px;line-height:1.5}
+.urg-row{display:flex;gap:7px}
+.upill{flex:1;padding:9px 6px;border-radius:5px;border:1.5px solid var(--border);background:var(--cream);font-size:11px;font-weight:600;cursor:pointer;text-align:center;transition:.2s;color:var(--ink)}
+.upill:hover,.upill.on{border-color:var(--blue);background:var(--sky);color:var(--blue)}
+.upill.ue{border-color:var(--blue3);background:#E3F2FD;color:var(--blue3)}
+.btn-sub{width:100%;padding:14px;border-radius:8px;background:var(--navy);color:#fff;border:none;cursor:pointer;font-size:13px;font-weight:700;font-family:'Jost',sans-serif;letter-spacing:.03em;transition:.25s;margin-top:4px;display:flex;align-items:center;justify-content:center;gap:7px}
+.btn-sub:hover{background:var(--blue);transform:translateY(-2px);box-shadow:0 7px 20px rgba(21,101,192,0.3)}
+.f-disc{text-align:center;font-size:10px;color:var(--gray);margin-top:8px}
+
+/* REVIEWS */
+.g-badge{display:inline-flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--border);border-radius:7px;padding:9px 14px;margin-bottom:18px;box-shadow:0 2px 7px rgba(0,0,0,0.05)}
+.g-stars{color:#FBBC04;font-size:13px}
+.g-txt{font-size:11px;font-weight:600;color:var(--ink)}
+.g-cnt{font-size:10px;color:var(--gray)}
+
+/* URGENCY FOOTER */
+.uf{background:var(--navy);padding:28px 20px;text-align:center;border-top:3px solid var(--blue)}
+.uf h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;color:#fff;margin-bottom:6px}
+.uf p{font-size:13px;color:rgba(255,255,255,0.5);margin-bottom:16px}
+.btn-gold{display:inline-flex;align-items:center;gap:7px;background:var(--gold);color:var(--navy);padding:13px 28px;border-radius:5px;font-size:13px;font-weight:700;text-decoration:none;transition:.2s}
+.btn-gold:hover{background:var(--gold2)}
+
+/* FOOTER */
+footer{background:#0A0E14;padding:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.f-brand{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;color:#fff}
+.f-brand b{color:var(--gold2)}
+.f-copy{font-size:10px;color:rgba(255,255,255,0.25)}
+.f-lnks{display:flex;gap:14px}
+.f-lnks a{font-size:10px;color:rgba(255,255,255,0.35);text-decoration:none}
+
+/* REVEAL */
+.rv{opacity:1;transform:none;transition:.65s ease}
+.rv.vis{opacity:1;transform:translateY(0)}
+
+/* DESKTOP */
+@media(min-width:900px){
+  .hero{min-height:90vh}
+  .hero-body{padding:64px 5% 72px;max-width:680px}
+  .hero h1{font-size:58px}
+  .hero-sub{font-size:16px}
+  .emerg{padding:14px 5%}
+  .banner-body{padding:32px 5%;max-width:600px}
+  .banner h2{font-size:28px}
+  .stats{display:grid;grid-template-columns:repeat(5,1fr)}
+  .certs,.sec{padding:48px 5%}
+  .svc-grid{grid-template-columns:repeat(4,1fr)}
+  .svc-img{height:170px}
+  .why-split{display:flex;gap:40px;align-items:center}
+  .why-img-wrap{flex:0 0 46%;margin-bottom:0}
+  .why-img-wrap img{height:360px}
+  .ai-cards{flex-direction:row}
+  .c-wrap{flex-direction:row;gap:32px}
+  .steps{flex:0 0 38%}
+  nav{padding:14px 5%}
+  .topbar{padding:7px 5%}
+  footer{padding:22px 5%}
+  .uf{padding:36px 5%}
+}
+
+/* TABLET */
+@media(min-width:600px) and (max-width:899px){
+  .svc-grid{grid-template-columns:repeat(2,1fr)}
+  .hero h1{font-size:44px}
+  .sec{padding:44px 5%}
+  nav{padding:12px 5%}
+}
+
+/* MOBILE */
+@media(max-width:599px){
+  .hero{min-height:92svh}
+  .hero-body{padding:28px 16px 40px}
+  .hero h1{font-size:32px}
+  .hero-btns{flex-direction:column}
+  .svc-grid{grid-template-columns:1fr 1fr}
+  .f-row{grid-template-columns:1fr}
+  .urg-row{gap:5px}
+  .stats{grid-template-columns:repeat(3,1fr)}
+  .stat:nth-child(4),.stat:nth-child(5){display:none}
+  .certs-row{gap:6px}
+  .cert{font-size:10px;padding:5px 9px}
+  footer{flex-direction:column;text-align:center}
+  .f-lnks{justify-content:center}
+  .tb-left{display:none}
+  .banner-body{padding:22px 16px}
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="tb-left">🕐 Mon–Sat 8am–10pm · Emergency 24/7 · 📍 <span id="tb-city">London</span></div>
+  <a href="#" class="tb-phone" id="tb-phone">📞 Call Now — Free Callout</a>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-left">
+    <img src="https://images.unsplash.com/photo-1607400201515-c2c41c07d307?w=80&q=80" alt="logo" style="border-radius:6px;object-fit:cover"/>
+    <div class="nav-brand" id="nav-brand">AlNoor <b>Plumbing</b></div>
+  </div>
+  <a href="#contact" class="nav-cta">📋 Free Quote</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <img class="hero-photo" id="hero-photo"
+    src="https://images.unsplash.com/photo-1607400201515-c2c41c07d307?w=1400&q=85"
+    alt="Professional plumber at work"/>
+  <div class="hero-grad"></div>
+  <div class="hero-body">
+    <div class="hero-tag">✦ CERTIFIED <span id="h-ind-t">PLUMBERS</span> · <span id="h-city-t">LONDON</span> ✦</div>
+    <h1>Your Trusted<br><em id="h-ind">Plumbing</em><br>Experts in <em id="h-city">London</em></h1>
+    <p class="hero-sub" id="h-sub">Professional service by certified engineers. <strong id="h-biz" style="color:#fff">AlNoor Plumbing</strong> responds within 60 minutes — available 24/7 across <span id="h-city2">London</span>.</p>
+    <div class="hero-btns">
+      <a href="#" class="btn-blue" id="h-call" onclick="return false;">📞 Ring Us Now — No Callout Fee</a>
+      <a href="#contact" class="btn-ghost" onclick="goToForm();return false;">📋 Request a Free Quote</a>
+    </div>
+    <div class="hero-trust">
+      <span class="ht">✅ No Call-Out Fee</span>
+      <span class="ht">🏅 Gas Safe Registered</span>
+      <span class="ht">⭐ 4.9 Stars</span>
+      <span class="ht">🔒 12-Month Guarantee</span>
+    </div>
+  </div>
+</div>
+
+<!-- EMERGENCY -->
+<div class="emerg">
+  <div>
+    <div class="emerg-t">⚡ Plumbing Emergency in <span id="e-city">London</span>?</div>
+    <div class="emerg-s">Engineer on the way within minutes · We're available right now</div>
+  </div>
+  <a href="#" class="emerg-btn" id="e-call" onclick="return false;">📞 Ring Emergency Line</a>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><span class="stat-n">500+</span><div class="stat-l">Jobs Done</div></div>
+  <div class="stat"><span class="stat-n">⭐4.9</span><div class="stat-l">Google Rating</div></div>
+  <div class="stat"><span class="stat-n">24/7</span><div class="stat-l">Available</div></div>
+  <div class="stat"><span class="stat-n">&lt;60m</span><div class="stat-l">Response</div></div>
+  <div class="stat"><span class="stat-n">12mo</span><div class="stat-l">Guarantee</div></div>
+</div>
+
+<!-- CERTS -->
+<div class="certs rv">
+  <div class="certs-lbl">Certified & Approved By</div>
+  <div class="certs-row">
+    <div class="cert">🔥 Gas Safe</div>
+    <div class="cert">✅ CheckaTrade</div>
+    <div class="cert">🏅 TrustaTrader</div>
+    <div class="cert">🛡️ NICEIC</div>
+    <div class="cert">💧 WIAPS</div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="sec sec-cream rv" id="services">
+  <span class="eyebrow">Our Services</span>
+  <h2 id="svc-h2">Complete Plumbing Services</h2>
+  <p class="lead" id="svc-lead">Every job completed to the highest standard, with a 12-month workmanship guarantee on all work carried out in London.</p>
+  <div class="svc-grid" id="svc-grid"></div>
+</section>
+
+<!-- WHY US -->
+<section class="sec sec-white rv" id="about">
+  <span class="eyebrow">Why Choose Us</span>
+  <h2 id="why-h2">AlNoor Plumbing — The Difference</h2>
+  <div class="why-split">
+    <div class="why-img-wrap">
+      <img src="https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=600&q=80"
+        alt="Professional engineer"/>
+    </div>
+    <div class="why-list">
+      <div class="why-item"><div class="why-num">1</div><div><div class="why-title">⚡ On Our Way in 60 Minutes</div><div class="why-desc" id="wy1">Our Gas Safe engineers cover all areas of London and are dispatched the moment you ring. Brilliant response times, day or night.</div></div></div>
+      <div class="why-item"><div class="why-num">2</div><div><div class="why-title">🏅 Gas Safe Registered</div><div class="why-desc">Every engineer carries their Gas Safe ID card and is fully insured. You're in very safe hands.</div></div></div>
+      <div class="why-item"><div class="why-num">3</div><div><div class="why-title">💷 No Hidden Charges — Ever</div><div class="why-desc">We always provide a clear, written quote before starting any work. No surprises on the invoice. Lovely.</div></div></div>
+      <div class="why-item"><div class="why-num">4</div><div><div class="why-title">✅ 12-Month Workmanship Guarantee</div><div class="why-desc">All work is fully guaranteed. If anything isn't quite right, we'll pop back and sort it out at no extra cost.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- AI -->
+<section class="sec sec-navy rv">
+  <span class="eyebrow">Your AI Assistant — Available Now</span>
+  <h2>Chat or Call <em style="color:var(--gold2);font-style:normal" id="ai-biz">AlNoor</em>.<br>We Never Sleep.</h2>
+  <p class="lead" id="ai-lead">Get in touch any time of day or night. Our AI assistant takes your details, assesses your issue, and arranges an engineer in London — instantly.</p>
+  <div class="ai-cards">
+    <div class="ai-card" style="cursor:pointer" onclick="openWidget()">
+      <div class="ai-hdr">
+        <div class="ai-icon-box ai-icon-blue">💬</div>
+        <div><div class="ai-title">Send Us a Message</div><div class="ai-sub">Instant reply · 24/7</div></div>
+        <div class="ai-dot"></div>
+      </div>
+      <div class="chat-preview">
+        <div class="cbub cu">I've got a burst pipe in <span id="cc-city">London</span> — it's urgent</div>
+        <div class="cbub ca">Not to worry! I'm the <span id="cc-biz">AlNoor</span> AI. I'll get someone to you straight away. Could I take your postcode?</div>
+        <div class="typing"><span class="tdot"></span><span class="tdot"></span><span class="tdot"></span></div>
+      </div>
+      <button class="btn-ai btn-ai-b" onclick="openWidget()">💬 Start a Chat Now →</button>
+    </div>
+    <div class="ai-card">
+      <div class="ai-hdr">
+        <div class="ai-icon-box ai-icon-blue2">📞</div>
+        <div><div class="ai-title">Give Us a Ring</div><div class="ai-sub">Speak to our AI · 24/7</div></div>
+        <div class="ai-dot"></div>
+      </div>
+      <div class="wave">
+        <div class="wb"></div><div class="wb"></div><div class="wb"></div><div class="wb"></div>
+        <div class="wb"></div><div class="wb"></div><div class="wb"></div><div class="wb"></div>
+      </div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.45);text-align:center;margin-bottom:14px">Our voice assistant answers immediately, assesses your issue, and books your visit in seconds.</div>
+      <a href="#" class="btn-ai btn-ai-b2" id="ai-call">📞 Call Us Now →</a>
+    </div>
+  </div>
+  <div class="ai-note">🔒 All conversations are private and secure. Your details are never shared.</div>
+</section>
+
+<!-- REVIEWS — moved above contact -->
+<section class="sec sec-white rv">
+  <div class="g-badge">
+    <div><div class="g-stars">★★★★★</div><div class="g-txt">Verified Client Reviews</div></div>
+    <div style="border-left:1px solid var(--border);padding-left:10px"><div class="g-cnt">Powered by</div><div style="font-size:10px;color:var(--blue);font-weight:600">Elegant Options AI ✓</div></div>
+  </div>
+  <h2>What Our Clients Say<br>Across <span id="rv-city">London</span></h2>
+  <script type='text/javascript' src='https://brand.elegant-options.com/reputation/assets/review-widget.js'></script>
+  <iframe class='lc_reviews_widget'
+    src='https://brand.elegant-options.com/reputation/widgets/review_widget/vX7gQQOe9PXtkGes2GOJ'
+    frameborder='0' scrolling='no'
+    style='min-width:100%;width:100%;border:none;min-height:480px;display:block'>
+  </iframe>
+</section>
+
+<!-- CONTACT FORM -->
+<section class="sec sec-cream rv" id="contact">
+  <span class="eyebrow">Request a Visit</span>
+  <h2>We Come To You<br>in <span id="fc-city">London</span></h2>
+  <div class="c-wrap">
+    <div class="steps">
+      <div class="step"><div class="step-c">1</div><div><div class="step-t">Fill in your details below</div><div class="step-d">Takes less than a minute — brilliant</div></div></div>
+      <div class="step"><div class="step-c">2</div><div><div class="step-t">We'll ring you within 5 minutes</div><div class="step-d">To confirm your issue and sort out a time</div></div></div>
+      <div class="step"><div class="step-c">3</div><div><div class="step-t">Engineer pops round to your door</div><div class="step-d" id="s3">Fully equipped and ready to crack on</div></div></div>
+      <div class="guar"><div class="guar-t">🔒 Free Quote — No Obligation</div><div class="guar-d">No callout fee. No pressure. Just honest advice from <span id="gb">AlNoor Plumbing</span>.</div></div>
+    </div>
+    <div class="form-card" id="form-card">
+      <div class="f-row">
+        <div class="fg"><label class="flbl">Full Name *</label><input class="finp" type="text" placeholder="Your name" id="fn"/></div>
+        <div class="fg"><label class="flbl">Phone Number *</label><input class="finp" type="tel" placeholder="+44 7700 900000" id="fp"/><div style="font-size:9px;color:var(--gray);margin-top:3px">We'll call within 5 minutes</div></div>
+      </div>
+      <div class="f-row">
+        <div class="fg"><label class="flbl">Postcode *</label><input class="finp" type="text" placeholder="SW1A 1AA" id="fpc"/></div>
+        <div class="fg"><label class="flbl">Service Type</label>
+          <select class="finp">
+            <option value="">Select service...</option>
+            <option>🚨 Emergency Repair</option>
+            <option>🔧 Routine Service</option>
+            <option>🚿 Installation</option>
+            <option>🔥 Boiler Service</option>
+            <option>💧 Leak Detection</option>
+            <option>📋 Free Inspection</option>
+          </select>
+        </div>
+      </div>
+      <div class="fg"><label class="flbl">Urgency</label>
+        <div class="urg-row">
+          <div class="upill ue on" onclick="setU(this)">🚨 Emergency</div>
+          <div class="upill" onclick="setU(this)">📅 Today</div>
+          <div class="upill" onclick="setU(this)">🗓️ This Week</div>
+        </div>
+      </div>
+      <div class="fg"><label class="flbl">Describe the Issue</label><textarea class="finp" placeholder="Briefly tell us what's happening..."></textarea></div>
+      <button class="btn-sub" onclick="submitForm()">SEND MY REQUEST — WE'LL CALL YOU SHORTLY →</button>
+      <div class="f-disc">🔒 No spam. No marketing calls. We only call regarding your request.</div>
+    </div>
+  </div>
+</section>
+
+<!-- BANNER — moved below contact -->
+<div class="banner">
+  <img class="banner-photo"
+    src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80"
+    alt="Plumber"/>
+  <div class="banner-grad"></div>
+  <div class="banner-body">
+    <div class="banner-dot"><span></span> AVAILABLE NOW · 24/7</div>
+    <h2 id="banner-h">AlNoor Plumbing — London's Trusted Engineers</h2>
+    <div class="banner-sub">No callout fee · Gas Safe certified · 12-month guarantee</div>
+    <div class="banner-btns">
+      <a href="#contact" class="banner-btn-w">📋 Free Quote →</a>
+      <a href="#" class="banner-btn-b" id="banner-call">📞 Call Now</a>
+    </div>
+  </div>
+</div>
+
+<!-- GOOGLE MAPS -->
+<section id="maps-section" style="display:none" class="sec sec-white rv">
+  <span class="eyebrow">Find Us</span>
+  <h2>Visit <span id="map-biz">AlNoor Plumbing</span><br>in <span id="map-city">London</span></h2>
+  <p class="lead">We're based locally and cover all surrounding postcodes. Pop our address into your sat nav and we'll see you shortly.</p>
+  <div style="border-radius:12px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.1);border:1px solid var(--border)">
+    <iframe id="map-iframe" src="" width="100%" height="320" style="border:0;display:block" allowfullscreen loading="lazy"></iframe>
+  </div>
+  <div style="margin-top:14px;padding:14px;background:var(--sky);border-radius:8px;display:flex;align-items:center;gap:10px;font-size:13px;color:var(--blue)">
+    <span style="font-size:18px">📍</span>
+    <span>Serving <strong id="map-city2">London</strong> and all surrounding areas. Same-day visits available.</span>
+  </div>
+</section>
+
+<!-- URGENCY FOOTER -->
+<div class="uf rv">
+  <h3>Don't Leave It — Get It Sorted Today.</h3>
+  <p><span id="uf-biz">AlNoor Plumbing</span> is available right now — day or night. Lovely service, guaranteed.</p>
+  <a href="#contact" class="btn-gold" onclick="goToForm();return false;">GET IT SORTED NOW →</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-brand" id="f-brand">AlNoor <b>Plumbing</b></div>
+  <div class="f-lnks"><a href="#services">Services</a><a href="#contact">Contact</a><a href="#">Privacy</a></div>
+  <div class="f-copy" id="f-copy">© 2025 AlNoor Plumbing. All rights reserved.</div>
+</footer>
+
+<!-- GHL CHAT WIDGET -->
+<script src="https://widgets.leadconnectorhq.com/loader.js"
+  data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
+  data-widget-id="69d66b3d2385befddc6e730e"></script>
+
+<script>
+// ── URL PARAMS ──
+const P = new URLSearchParams(window.location.search);
+const BIZ   = P.get('biz_name')  || 'AlNoor Plumbing';
+const CITY  = P.get('city')      || 'London';
+const IND   = P.get('industry')  || 'Plumbing';
+const PHONE = P.get('phone')     || '';
+
+// ── SAFE SET ──
+const s  = (id, v) => { const e=document.getElementById(id); if(e) e.textContent=v; };
+const sh = (id, v) => { const e=document.getElementById(id); if(e) e.innerHTML=v; };
+
+// ── FILL ALL FIELDS ──
+document.title = BIZ + ' — ' + IND + ' Services in ' + CITY;
+const parts = BIZ.split(' ');
+const bMain = parts.slice(0,-1).join(' ') || BIZ;
+const bLast = parts.slice(-1)[0] || '';
+sh('nav-brand',  bMain + ' <b style="color:var(--blue)">' + bLast + '</b>');
+sh('f-brand',    bMain + ' <b>' + bLast + '</b>');
+s('tb-city',     CITY);
+s('h-ind-t',     IND.toUpperCase());
+s('h-city-t',    CITY.toUpperCase());
+s('h-ind',       IND);
+s('h-city',      CITY);
+s('h-biz',       BIZ);
+s('h-city2',     CITY);
+s('e-city',      CITY);
+s('banner-h',    BIZ + " — " + CITY + "'s Trusted Engineers");
+s('svc-h2',      'All Your ' + IND + ' Needs Sorted in ' + CITY);
+s('svc-lead',    'From emergency callouts to full installations — every job in ' + CITY + ' completed to the highest standard, with a 12-month workmanship guarantee on all work carried out.');
+sh('why-h2',     bMain + ' <b>' + bLast + '</b> — The Difference');
+s('wy1',         'Our Gas Safe engineers cover all areas of ' + CITY + ' and are on their way the moment you ring. Brilliant response times, day or night.');
+s('ai-biz',      BIZ.split(' ')[0]);
+s('ai-lead',     'Get in touch with ' + BIZ + ' any time — day or night. Our AI assistant sorts out the details, assesses your issue, and gets an engineer booked in for ' + CITY + ' straight away.');
+s('cc-city',     CITY);
+s('cc-biz',      BIZ.split(' ')[0]);
+s('fc-city',     CITY);
+s('s3',          'Fully equipped and ready to crack on · ' + CITY + ' coverage');
+s('gb',          BIZ);
+s('rv-city',     CITY);
+s('uf-biz',      BIZ);
+s('f-copy',      '© 2025 ' + BIZ + '. All rights reserved.');
+s('map-biz',     BIZ);
+s('map-city',    CITY);
+s('map-city2',   CITY);
+
+// ── PHONE BUTTONS ──
+if(PHONE){
+  ['tb-phone','h-call','e-call','ai-call','banner-call'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.href = 'tel:' + PHONE;
+  });
+}
+
+// ── SERVICES ──
+const SVCS = {
+  Plumbing:[
+    {tag:'24/7',title:'Emergency Pipe Repair',
+     desc:'Burst pipes fixed within the hour. No callout fee. ' + CITY + ' coverage.',
+     img:'https://assets.cdn.filesafe.space/vX7gQQOe9PXtkGes2GOJ/media/69d52455a7dcb4cff013e4d7.webp',
+     fb:'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=400&q=80'},
+    {tag:'Gas Safe',title:'Boiler Service & Repair',
+     desc:'All brands serviced by Gas Safe registered engineers. Same-day when possible.',
+     img:'https://assets.cdn.filesafe.space/vX7gQQOe9PXtkGes2GOJ/media/69d56b15f5ebf27de323d2d8.png',
+     fb:'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=400&q=80'},
+    {tag:'12-Mo Guarantee',title:'Bathroom Installation',
+     desc:'Complete bathroom fitting with full workmanship guarantee on all installations.',
+     img:'https://assets.cdn.filesafe.space/vX7gQQOe9PXtkGes2GOJ/media/69d56b15a64a04ba15bdfb2c.png',
+     fb:'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=400&q=80'},
+    {tag:'No Damage',title:'Leak Detection',
+     desc:'Thermal imaging to locate hidden leaks without damage to your property.',
+     img:'https://assets.cdn.filesafe.space/vX7gQQOe9PXtkGes2GOJ/media/69d5245586416fa8388aa945.webp',
+     fb:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80'},
+  ],
+  HVAC:[
+    {tag:'All Brands',title:'AC Installation',desc:'Full installation for homes and businesses in '+CITY+'. All major brands.',
+     img:'https://assets.cdn.filesafe.space/vX7gQQOe9PXtkGes2GOJ/media/69d56b15ebf1a608430eb8e5.png',fb:'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=400&q=80'},
+    {tag:'Emergency',title:'Heating Repair',desc:'Fast diagnostics and repair. Emergency callouts 24/7.',
+     img:'https://assets.cdn.filesafe.space/vX7gQQOe9PXtkGes2GOJ/media/69d56b15f5ebf27de323d2d8.png',fb:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80'},
+    {tag:'Certified',title:'Ventilation Systems',desc:'Design, supply and installation for homes and commercial premises.',
+     img:'https://assets.cdn.filesafe.space/vX7gQQOe9PXtkGes2GOJ/media/69d56b15a64a04ba15bdfb2c.png',fb:'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=400&q=80'},
+    {tag:'Annual',title:'Service & Maintenance',desc:'Keep your systems efficient with our annual service contract.',
+     img:'https://assets.cdn.filesafe.space/vX7gQQOe9PXtkGes2GOJ/media/69d5245586416fa8388aa945.webp',fb:'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=400&q=80'},
+  ],
+  Cleaning:[
+    {tag:'Popular',title:'Deep Clean',desc:'Thorough deep clean of your entire property in '+CITY+'.',
+     img:'https://assets.cdn.filesafe.space/vX7gQQOe9PXtkGes2GOJ/media/69d56b15ebf1a608430eb8e5.png',fb:'https://images.unsplash.com/photo-1527515637462-cff94edd56f9?w=400&q=80'},
+    {tag:'Best Value',title:'Regular Contract',desc:'Weekly or fortnightly cleaning contracts tailored to you.',
+     img:'https://assets.cdn.filesafe.space/vX7gQQOe9PXtkGes2GOJ/media/69d56b15f5ebf27de323d2d8.png',fb:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80'},
+    {tag:'Guaranteed',title:'End of Tenancy',desc:'Full clean to landlord standard. Deposit return guaranteed.',
+     img:'https://assets.cdn.filesafe.space/vX7gQQOe9PXtkGes2GOJ/media/69d56b15a64a04ba15bdfb2c.png',fb:'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=400&q=80'},
+    {tag:'Commercial',title:'Office Cleaning',desc:'Professional contracts for offices and retail across '+CITY+'.',
+     img:'https://assets.cdn.filesafe.space/vX7gQQOe9PXtkGes2GOJ/media/69d5245586416fa8388aa945.webp',fb:'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=400&q=80'},
+  ],
+  Electrical:[
+    {tag:'NICEIC',title:'Full Rewiring',desc:'Complete rewiring by certified electricians. All work guaranteed.',
+     img:'https://assets.cdn.filesafe.space/vX7gQQOe9PXtkGes2GOJ/media/69d56b15ebf1a608430eb8e5.png',fb:'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=400&q=80'},
+    {tag:'Smart Home',title:'Lighting Installation',desc:'LED and smart home lighting design and installation.',
+     img:'https://assets.cdn.filesafe.space/vX7gQQOe9PXtkGes2GOJ/media/69d56b15f5ebf27de323d2d8.png',fb:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80'},
+    {tag:'Diagnostic',title:'Fault Finding',desc:'Advanced thermal imaging to diagnose faults quickly.',
+     img:'https://assets.cdn.filesafe.space/vX7gQQOe9PXtkGes2GOJ/media/69d56b15a64a04ba15bdfb2c.png',fb:'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=400&q=80'},
+    {tag:'OZEV',title:'EV Charger Install',desc:'OZEV approved EV charger installation for home and business.',
+     img:'https://assets.cdn.filesafe.space/vX7gQQOe9PXtkGes2GOJ/media/69d5245586416fa8388aa945.webp',fb:'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=400&q=80'},
+  ],
+};
+const svcs = SVCS[IND] || SVCS.Plumbing;
+document.getElementById('svc-grid').innerHTML = svcs.map(sv => `
+  <div class="svc-card">
+    <div class="svc-img">
+      <img src="${sv.fb}" alt="${sv.title}"
+        style="width:100%;height:100%;object-fit:cover;object-position:center;display:block"/>
+      <div class="svc-tag-w"><span class="svc-tag">${sv.tag}</span></div>
+    </div>
+    <div class="svc-body">
+      <div class="svc-title">${sv.title}</div>
+      <div class="svc-desc">${sv.desc}</div>
+      <a href="#contact" class="svc-lnk">Request this service →</a>
+    </div>
+  </div>`).join('');
+
+// ── OPEN VOICE WIDGET (for call buttons) ──
+function openVoice(){
+  // Try GHL Voice AI widget button first
+  const voiceBtn = document.querySelector('.lcw-voice-button') ||
+                   document.querySelector('[class*="voice"]') ||
+                   document.querySelector('[data-type="voice"]');
+  if(voiceBtn){ voiceBtn.click(); return; }
+  // Fallback: open chat widget
+  const chatBtn = document.querySelector('.lcw-chat-button') ||
+                  document.querySelector('[class*="chat-button"]');
+  if(chatBtn){ chatBtn.click(); return; }
+  // Final fallback: tel link
+  if(PHONE) window.location.href = 'tel:' + PHONE;
+}
+
+// ── OPEN CHAT WIDGET ──
+function openWidget(){
+  const btn = document.querySelector('.lcw-chat-button') ||
+              document.querySelector('[class*="chat-button"]');
+  if(btn) btn.click();
+}
+
+// ── SCROLL TO FORM ──
+function goToForm(){
+  const form = document.getElementById('contact');
+  if(form) form.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+// ── GOOGLE MAPS ──
+const MAPS_URL = P.get('maps_url') || '';
+const PLACE_ID = P.get('place_id') || '';
+if(MAPS_URL || PLACE_ID){
+  const mapsSection = document.getElementById('maps-section');
+  if(mapsSection){
+    mapsSection.style.display = 'block';
+    const mapSrc = PLACE_ID
+      ? `https://www.google.com/maps/embed/v1/place?key=AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY&q=place_id:${PLACE_ID}`
+      : `https://maps.google.com/maps?q=${encodeURIComponent(MAPS_URL)}&output=embed`;
+    document.getElementById('map-iframe').src = mapSrc;
+  }
+}
+
+// ── WIRE CALL BUTTONS TO VOICE ──
+['h-call','e-call','banner-call','tb-phone'].forEach(id => {
+  const el = document.getElementById(id);
+  if(el){
+    el.addEventListener('click', function(e){
+      e.preventDefault();
+      openVoice();
+    });
+  }
+});
+
+// ── WIRE FREE QUOTE BUTTONS TO FORM ──
+document.querySelectorAll('.nav-cta, .btn-ghost, .banner-btn-w').forEach(el => {
+  el.addEventListener('click', function(e){
+    if(this.getAttribute('href') === '#contact' || this.textContent.includes('Quote')){
+      e.preventDefault();
+      goToForm();
+    }
+  });
+});
+
+// ── AI CALL BUTTON ──
+const aiCallEl = document.getElementById('ai-call');
+if(aiCallEl){
+  aiCallEl.addEventListener('click', function(e){
+    e.preventDefault();
+    openVoice();
+  });
+}
+
+// ── URGENCY ──
+function setU(el){
+  document.querySelectorAll('.upill').forEach(p => { p.classList.remove('on','ue'); });
+  el.classList.add('on');
+  if(el.textContent.includes('Emergency')) el.classList.add('ue');
+}
+
+// ── FORM SUBMIT ──
+function submitForm(){
+  const nm = document.getElementById('fn').value.trim();
+  const ph = document.getElementById('fp').value.trim();
+  if(!nm || !ph){ alert('Please enter your name and phone number.'); return; }
+  document.getElementById('form-card').innerHTML = `
+    <div style="text-align:center;padding:36px 16px">
+      <div style="font-size:52px;margin-bottom:14px">✅</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;color:var(--navy);margin-bottom:8px">Request Received!</div>
+      <p style="font-size:13px;color:var(--gray);line-height:1.7">${BIZ} will call <strong>${nm}</strong> at <strong>${ph}</strong> within 5 minutes to confirm your visit in ${CITY}.</p>
+      <div style="margin-top:16px;padding:12px;background:var(--sky);border-radius:7px;font-size:12px;color:var(--blue);font-weight:500">📱 You'll receive an SMS confirmation shortly.</div>
+    </div>`;
+}
+
+// ── SCROLL REVEAL ──
+const obs = new IntersectionObserver(els => {
+  els.forEach(el => { if(el.isIntersecting) el.target.classList.add('vis'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+
+// ── LISTEN FOR PARENT MESSAGE TO OPEN WIDGET ──
+window.addEventListener('message', function(e){
+  if(e.data && e.data.type === 'openWidget'){
+    openWidget();
+  }
+});
+</script>
+</body>
+</html>
