@@ -1024,5 +1024,25 @@ if(track){
     </div>`).join('');
 }
 </script>
+  <script>
+// تتبع فتح الصفحة وإرسال تنبيه لـ n8n أو GHL مباشرة
+window.addEventListener('load', () => {
+  const params = new URLSearchParams(window.location.search);
+  const contactId = params.get('contact_id'); // سنقوم بتمريره من n8n لاحقاً
+
+  if (contactId) {
+    // إرسال طلب لـ n8n لتحديث المرحلة في GHL
+    fetch('https://n8n.elegant-options.com/webhook/track-view', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ 
+        contact_id: contactId,
+        event: 'demo_viewed',
+        biz_name: params.get('biz_name')
+      })
+    });
+  }
+});
+</script>
 </body>
 </html>
